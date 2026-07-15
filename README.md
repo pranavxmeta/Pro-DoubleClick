@@ -38,8 +38,7 @@ Designed with minimalist UI yet packed with customization. Save time, maximize y
 
 Download the Pro DoubleClick extension on your Desktop & Mobile:
 
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg" height="20" width="20" style="margin-right:8px;"/> [![Microsoft Edge Store](https://img.shields.io/badge/Microsoft%20Edge%20Store-0E4B75)](https://microsoftedge.microsoft.com/addons/detail/pro-doubleclick/pgbkdhcaloojlampecdjnmpdffkkjkob)
+[<img alt="Get it from GitHub" src="assets/githubInstall.png" width="140">](https://github.com/pranavxmeta/Pro-DoubleClick/releases)&nbsp;&nbsp;&nbsp;&nbsp;[<img alt="Get it from Microsoft Edge" src="assets/msedgeInstall.png" width="180">](https://microsoftedge.microsoft.com/addons/detail/pro-doubleclick/pgbkdhcaloojlampecdjnmpdffkkjkob)
 
 
 ## 🎮 How to use
