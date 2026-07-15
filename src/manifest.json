@@ -1,0 +1,49 @@
+{
+    "manifest_version": 3,
+    "name": "Pro DoubleClick",
+    "version": "26.7.0",
+    "description": "Double Click to open links in new tab (front or background); built with customization.",
+    "icons": {
+        "32": "asset/logo/icon_32.png",
+        "48": "asset/logo/icon_48.png",
+        "128": "asset/logo/icon_128.png"
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "storage"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "action": {
+        "default_popup": "popup/popup.html"
+    },
+    "background": {
+        "service_worker": "scripts/background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "scripts/contentscripts.js"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "asset/icon-svg/*.svg"
+            ],
+            "matches": [
+                "chrome-extension://*/*"
+            ]
+        }
+    ]
+}

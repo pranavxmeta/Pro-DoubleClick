@@ -1,0 +1,21 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Grey circular background -->
+  <path d="M24 4C35.0457 4 44 12.9543 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24C4 12.9543 12.9543 4 24 4Z" fill="url(#paint0_linear_grey)"/>
+  
+  <!-- Dismiss X mark -->
+  <path d="M30.364 17.636C30.8521 17.1479 30.8521 16.3566 30.364 15.8684C29.8759 15.3803 29.0846 15.3803 28.5964 15.8684L24 20.4648L19.4036 15.8684C18.9154 15.3803 18.1241 15.3803 17.636 15.8684C17.1479 16.3566 17.1479 17.1479 17.636 17.636L22.2324 22.2324L17.636 26.8288C17.1479 27.3169 17.1479 28.1082 17.636 28.5964C18.1241 29.0845 18.9154 29.0845 19.4036 28.5964L24 24L28.5964 28.5964C29.0846 29.0845 29.8759 29.0845 30.364 28.5964C30.8521 28.1082 30.8521 27.3169 30.364 26.8288L25.7676 22.2324L30.364 17.636Z" fill="url(#paint1_linear_x)"/>
+  
+  <defs>
+    <!-- Grey gradient background -->
+    <linearGradient id="paint0_linear_grey" x1="5.42857" y1="11.5" x2="33.0334" y2="40.1803" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B0B0B0"/>
+      <stop offset="1" stop-color="#707070"/>
+    </linearGradient>
+    
+    <!-- X mark gradient -->
+    <linearGradient id="paint1_linear_x" x1="18" y1="18" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white"/>
+      <stop offset="1" stop-color="#E0E0E0"/>
+    </linearGradient>
+  </defs>
+</svg>
