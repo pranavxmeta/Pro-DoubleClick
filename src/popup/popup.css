@@ -3,61 +3,28 @@
 *::after {
     font-family: sans-serif;
     -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
 }
 
-/* 1. HTML sets the explicit popup viewport frame */
 html {
     min-width: 310px;
     max-width: 440px;
-    height: 430px;
-    /* Forces viewport height to 250px */
     margin: 0;
     padding: 0;
     overflow: hidden;
-    /* Stops double scrollbars on root */
 }
 
-/* 2. BODY acts as the scroll container */
 body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    background: #f8f8f8;
-
-    overflow-y: auto;
-    /* Triggers vertical scrollbar when content > 250px */
-    overflow-x: hidden;
-}
-
-body {
+    background: #1a1a1a;
+    color: whitesmoke;
     display: flex;
     justify-content: center;
-
-}
-
-body::-webkit-scrollbar {
-    width: 4px;
-    /* Explicit width makes it visible */
-}
-
-body::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    /* Visible track color */
-}
-
-body::-webkit-scrollbar-thumb {
-    background-image: -webkit-gradient(linear,
-            left bottom,
-            left top,
-
-            color-stop(0.72, rgb(73, 125, 189)),
-            color-stop(0.86, rgb(122, 153, 217)));
-    border-radius: 5px;
-}
-
-body::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .container {
@@ -78,7 +45,6 @@ body::-webkit-scrollbar-thumb:hover {
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    color: #1f2937;
     margin-bottom: 0.25rem;
 }
 
@@ -88,65 +54,14 @@ body::-webkit-scrollbar-thumb:hover {
     padding: 0.2rem 0.5rem 0.2rem 0.25rem;
 }
 
-.title-header a {
+.title-header p {
     font-size: 1rem;
-    text-decoration: none;
-    cursor: pointer;
-    color: #1f2937;
-}
-
-.btn-guide {
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    padding: 0.25rem 0.4rem;
-    border: none;
-    font: inherit;
-    cursor: pointer;
-    color: rgba(40, 45, 62, 0.8);
-    font-size: 0.75rem;
-    background: none;
-    border-radius: 15px;
-    border: 1px solid rgb(100, 100, 100, 0.4);
-}
-
-
-
-.action-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 1);
-    background: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    box-shadow: rgba(29, 33, 48, 0.04) 0px 5px 5px -2.5px, rgba(255, 129, 112, 0.16) 0px 10px 10px -5px, rgba(255, 129, 112, 0.08) 0px 24px 24px -8px;
-
-}
-
-.action-btn.is-blocked {
-    background: rgba(255, 0, 0, 0.3);
-    border: none;
-    box-shadow: none;
-}
-
-.button-layout {
-    display: flex;
-    gap: 0.3rem;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.75rem;
-    letter-spacing: 0.04rem;
-    color: rgba(39, 41, 109, 0.8);
+    color: whitesmoke;
+    margin: 0;
 }
 
 .card-status {
-    border: 2px solid rgba(255, 255, 255, 1);
-    /* box-shadow: -2px -2px 10px -5px rgba(84, 198, 227, 0.56), 2px 2px 10px -5px rgba(4, 0, 255, 0.6); */
+    border: 2px solid rgba(255, 255, 255, 0.6);
     margin: 0.25rem auto;
     width: 90%;
     border-radius: 20px;
@@ -155,33 +70,43 @@ body::-webkit-scrollbar-thumb:hover {
     flex-shrink: 0;
 }
 
-.connect-section {
-    margin: 0.25rem auto;
-    width: 90%;
+.status-current {
     display: flex;
+    gap: 5px;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
-    z-index: 2;
-    margin-bottom: 0.5rem;
-    flex-shrink: 0;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    color: whitesmoke;
 }
 
-.card {
-    margin: 0.35rem auto;
+.site-card {
     width: 90%;
-    border-radius: 20px;
-    padding: 0.5rem 0;
+    margin: 0.45rem auto;
+    display: flex;
     flex-shrink: 0;
+    padding: 0.25rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    border-radius: 18px;
+}
+
+/* Card borders matched to pill color themes */
+.site-card.this-site {
+    border: 2px solid rgba(255, 107, 0, 0.85);
+}
+
+.site-card.all-sites {
+    border: 2px solid rgba(34, 145, 139, 0.85);
 }
 
 .section-title {
     text-align: right;
-    color: rgba(4, 0, 100, 0.6);
+    color: whitesmoke;
     letter-spacing: 0.6px;
     z-index: 2;
     font-size: 0.8rem;
-
     padding-top: 0.2rem;
     padding-left: 0.6rem;
 }
@@ -189,7 +114,7 @@ body::-webkit-scrollbar-thumb:hover {
 .section-title-label {
     display: inline-block;
     text-align: left;
-    color: rgba(255, 255, 255, 1);
+    color: whitesmoke;
     border: none;
     padding: 0.15rem 0.4rem;
     border-radius: 25px;
@@ -201,31 +126,6 @@ body::-webkit-scrollbar-thumb:hover {
 
 .all-label {
     background: linear-gradient(-25deg, rgba(82, 209, 124, 0.8), rgba(34, 145, 139, 0.8));
-
-}
-
-.section-title-main {
-    width: 90%;
-    text-align: left;
-    margin-top: 0.5rem;
-    margin-left: 1.8rem;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: rgba(20, 20, 20, 0.9);
-    letter-spacing: 1.8px;
-    flex-shrink: 0;
-}
-
-.site-btn {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 0.5rem;
-    background: #ffffffCC;
-    border-radius: 25px;
-    border: 1px solid #e8e8e8;
-    box-shadow: rgba(200, 200, 200, 0.5) -2px 5px 1px 0px inset;
-    backdrop-filter: blur(40px);
 }
 
 .top-buttons {
@@ -240,21 +140,33 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .top-buttons-layout {
-    box-shadow: 0 2px 5px rgba(51, 102, 255, 0.24);
+    box-shadow: 0 2px 5px rgba(51, 102, 255, 0.74);
     display: flex;
     gap: 8px;
     align-items: center;
     flex: 1;
     text-align: center;
-    background: rgba(255, 255, 255, 0.8);
+    background: #1d1d1d;
     border-radius: 25px;
     border: none;
     outline: none;
     cursor: pointer;
     font: inherit;
-    color: inherit;
+    color: whitesmoke;
     padding: 0;
     margin-top: 0.2rem;
+}
+
+/* Darkened site-btn background */
+.site-btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0.5rem;
+    background: #2b2b2b;
+    border-radius: 25px;
+    border: 1px solid #444;
+    box-shadow: rgba(0, 0, 0, 0.3) -2px 5px 1px 0px inset;
 }
 
 .top-buttons-layout.selected .site-btn {
@@ -262,113 +174,116 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .tabicon {
-    color: #282d3eCC;
+    color: whitesmoke;
+    fill: whitesmoke;
     width: 24px;
     height: 24px;
     padding: 0.1rem;
 }
 
-
-.site-card {
-    width: 90%;
-    margin: 0.45rem auto;
-    display: flex;
-    flex-shrink: 0;
-    padding: 0.25rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 3px;
-    border-radius: 18px;
-    border: 2px solid white;
-}
-
-
-
-.top-buttons-layout.selected .site-btn .tabicon {
-    color: rgba(253, 253, 253, 0.9);
-}
-
 .button-name {
     letter-spacing: 0.03rem;
     font-size: 0.8rem;
-    color: rgba(39, 41, 109, 0.8);
+    color: whitesmoke;
+}
+
+.card {
+    margin: 0.35rem auto;
+    width: 90%;
+    border-radius: 20px;
+    padding: 0.5rem 0;
+    flex-shrink: 0;
 }
 
 .icon-settings {
     padding: 0 0.25rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
-.status-current {
+.button-layout {
     display: flex;
-    gap: 5px;
+    gap: 0.3rem;
+    flex-direction: column;
     align-items: center;
-    padding: 0.5rem 0.1rem 0.5rem 0.3rem;
     font-size: 0.75rem;
-    letter-spacing: 0.8px;
-    color: #6b7280;
+    letter-spacing: 0.04rem;
+    color: whitesmoke;
 }
 
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 6px;
+}
+
+.action-btn.is-blocked {
+    background: rgba(239, 68, 68, 0.4);
+    border-color: rgba(239, 68, 68, 0.9);
+}
+
+/* Sliding Panel UI */
 .sliding-panel {
     position: fixed;
     top: 0;
-    left: 0;
+    left: 100%;
     width: 100%;
     height: 100%;
-    background: rgba(250, 250, 250, 0.95);
-    backdrop-filter: blur(15px);
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2000;
+    background: #1a1a1a;
+    color: whitesmoke;
+    transition: left 0.3s ease;
+    z-index: 999;
     display: flex;
     flex-direction: column;
-    padding: 0.7rem;
-    box-sizing: border-box;
+    padding: 1rem;
 }
 
 .sliding-panel.open {
-    transform: translateX(0);
+    left: 0;
 }
 
 .panel-header {
-    margin-bottom: 0.75rem;
     display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
 }
 
 .dismiss-btn {
-    padding: 0.45rem 0;
-    width: 100%;
-    border-radius: 25px;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 122, 255, 0.8);
     background: transparent;
-    font-size: 1rem;
+    border: none;
+    color: whitesmoke;
     cursor: pointer;
-    color: rgba(0, 122, 255, 0.8);
+    font-size: 0.9rem;
 }
 
 .panel-tabs {
     display: flex;
-    gap: 10px;
+    gap: 0.5rem;
     margin-bottom: 1rem;
 }
 
 .tab-btn {
     flex: 1;
-    padding: 10px;
-    border: none;
-    background: rgba(253, 253, 253, 0.5);
-    border-radius: 25px;
+    padding: 0.4rem;
+    background: #2b2b2b;
+    color: whitesmoke;
+    border: 1px solid #444;
+    border-radius: 8px;
     cursor: pointer;
-    text-transform: capitalize;
-    color: #374151;
 }
 
 .tab-btn.active {
-    background: rgba(0, 122, 255, 0.8);
-    color: white;
+    background: rgba(4, 0, 255, 0.8);
+    border-color: rgba(76, 227, 247, 0.8);
 }
 
 .panel-list {
@@ -376,24 +291,17 @@ body::-webkit-scrollbar-thumb:hover {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.5rem;
 }
 
 .list-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
-    background: rgba(0, 122, 255, 0.1);
-    border-radius: 13px;
-    font-size: 12px;
-}
-
-.list-item-text {
-    flex-grow: 1;
-    color: rgba(20, 20, 20, 0.8);
-    word-break: break-all;
-    margin-right: 8px;
+    background: #282828;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    color: whitesmoke;
 }
 
 .list-item-btn {

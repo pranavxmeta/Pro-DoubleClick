@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // UI Elements
     const siteStatusTextOutput = document.getElementById("siteStatusTextOutput");
-    const removeSiteBtn = document.getElementById("btnRemove");
     const optionBtn = document.getElementById("btnOption");
     const resetBtn = document.getElementById("btnReset");
     const flagBtn = document.getElementById("btnFlag");
+    const flagLabel = document.getElementById("flagLabel");
 
     const overrideButtons = {
         front: document.getElementById("siteBtnFront"),
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
         back: document.getElementById("globalBtnBack"),
     };
 
-    // Icon Element Selector
     const statusIconElement = document.querySelector(".status-current img");
 
     const slidingPanel = document.getElementById("slidingPanel");
@@ -32,10 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function showToast(message) {
         const toast = document.createElement("div");
         toast.style.cssText = `
-            position:fixed; top:24px;
-            background:#1f2937; color:#fff; padding:8px 16px; border-radius:20px;
-            font-size:12px; font-weight:500; z-index:10000; box-shadow:0 4px 12px rgba(0,0,0,0.15);
-            transition:opacity 0.25s ease;
+            position:fixed; top:24px; left: 50%; transform: translateX(-50%);
+            background:#1f2937; color:whitesmoke; padding:8px 16px; border-radius:20px;
+            font-size:12px; font-weight:500; z-index:10000; box-shadow:0 4px 12px rgba(0,0,0,0.3);
+            transition:opacity 0.25s ease; white-space:nowrap;
         `;
         toast.textContent = message;
         document.body.appendChild(toast);
@@ -45,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
     }
 
-    // Get current tab hostname and normalize it (stripping 'www.')
+    // Retrieve clean domain hostname
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         if (tabs[0]?.url) {
             try {
@@ -63,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function syncStorageAndUI() {
         chrome.storage.sync.get(["defaultSetting", "sitePreferences", "excludedSites"], (data) => {
             const defaultSetting = data.defaultSetting || "background";
-            let sitePreferences = data.sitePreferences || {
+            const sitePreferences = data.sitePreferences || {
                 "google.com": "background",
                 "duckduckgo.com": "background",
             };
@@ -79,38 +78,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateButtonVisualStates(defaultSetting, sitePreferences, excludedSites) {
-        // Reset all
         Object.values(overrideButtons).forEach((b) => b?.classList.remove("selected"));
         Object.values(defaultButtons).forEach((b) => b?.classList.remove("selected"));
 
-        // Default buttons
         if (defaultSetting === "foreground") {
             defaultButtons.front?.classList.add("selected");
         } else {
             defaultButtons.back?.classList.add("selected");
         }
 
-        // Site override checks (checking clean domain)
-        if (currentHostname && !excludedSites[currentHostname]) {
+        const isBlocked = currentHostname && Boolean(excludedSites[currentHostname]);
+
+        if (currentHostname && !isBlocked) {
             const pref = sitePreferences[currentHostname];
-            if (pref) {
-                if (pref === "foreground") {
-                    overrideButtons.front?.classList.add("selected");
-                } else {
-                    overrideButtons.back?.classList.add("selected");
-                }
+            if (pref === "foreground") {
+                overrideButtons.front?.classList.add("selected");
+            } else if (pref === "background") {
+                overrideButtons.back?.classList.add("selected");
             }
         }
 
-        // Remove button visibility and functional availability
-        const hasSetting = currentHostname && (
-            sitePreferences[currentHostname] ||
-            excludedSites[currentHostname]
-        );
-
-        if (removeSiteBtn) {
-            removeSiteBtn.style.opacity = hasSetting ? "1" : "0.4";
-            removeSiteBtn.style.pointerEvents = hasSetting ? "auto" : "none";
+        if (flagBtn) {
+            flagBtn.classList.toggle("is-blocked", isBlocked);
+        }
+        if (flagLabel) {
+            flagLabel.textContent = isBlocked ? "unblock" : "block";
         }
     }
 
@@ -126,10 +118,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 iconPath = "../asset/icon-svg/icon-override.svg";
                 break;
             case "default":
-                iconPath = "../asset/icon-svg/icon-default.svg";
-                break;
             default:
                 iconPath = "../asset/icon-svg/icon-default.svg";
+                break;
         }
         statusIconElement.src = iconPath;
     }
@@ -160,39 +151,49 @@ document.addEventListener("DOMContentLoaded", () => {
         updateStatusIcon(iconState);
     }
 
-    // === Button Handlers ===
-    function handleSettingClick(isOverride, value) {
-        if (isOverride && !currentHostname) {
+    // Toggle logic for "this site" overrides
+    function handleOverrideClick(value) {
+        if (!currentHostname) {
             showToast("Cannot set override");
             return;
         }
 
-        chrome.storage.sync.get(["defaultSetting", "sitePreferences", "excludedSites"], (data) => {
-            let defaultSetting = data.defaultSetting || "background";
+        chrome.storage.sync.get(["sitePreferences", "excludedSites"], (data) => {
             let sitePreferences = data.sitePreferences || {};
             let excludedSites = data.excludedSites || {};
 
-            if (isOverride) {
-                delete excludedSites[currentHostname];
+            // Unblock site if setting override
+            delete excludedSites[currentHostname];
+
+            if (sitePreferences[currentHostname] === value) {
+                // If tapped while already selected, remove override rule
                 delete sitePreferences[currentHostname];
-                sitePreferences[currentHostname] = value;
+                showToast("Custom rule removed");
             } else {
-                defaultSetting = value;
+                // Set or update override
+                sitePreferences[currentHostname] = value;
+                showToast("Rule saved");
             }
 
-            chrome.storage.sync.set({ defaultSetting, sitePreferences, excludedSites }, () => {
-                updateButtonVisualStates(defaultSetting, sitePreferences, excludedSites);
-                renderStatusDisplay(defaultSetting, sitePreferences, excludedSites);
-                showToast("Rules saved");
+            chrome.storage.sync.set({ sitePreferences, excludedSites }, () => {
+                syncStorageAndUI();
             });
         });
     }
 
+    // Global default handler
+    function handleDefaultClick(value) {
+        chrome.storage.sync.set({ defaultSetting: value }, () => {
+            syncStorageAndUI();
+            showToast("Default updated");
+        });
+    }
+
     // Attach click listeners
-    overrideButtons.front?.addEventListener("click", () => handleSettingClick(true, "foreground"));
-    overrideButtons.back?.addEventListener("click", () => handleSettingClick(true, "background"));
-    defaultButtons.front?.addEventListener("click", () => handleSettingClick(false, "foreground"));
-    defaultButtons.back?.addEventListener("click", () => handleSettingClick(false, "background"));
+    overrideButtons.front?.addEventListener("click", () => handleOverrideClick("foreground"));
+    overrideButtons.back?.addEventListener("click", () => handleOverrideClick("background"));
+    defaultButtons.front?.addEventListener("click", () => handleDefaultClick("foreground"));
+    defaultButtons.back?.addEventListener("click", () => handleDefaultClick("background"));
 
     // Reset Extension Configuration
     resetBtn?.addEventListener("click", () => {
@@ -207,41 +208,25 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    removeSiteBtn?.addEventListener("click", () => {
-        if (!currentHostname) return;
-
-        chrome.storage.sync.get(["sitePreferences", "excludedSites"], (data) => {
-            let sitePreferences = data.sitePreferences || {};
-            let excludedSites = data.excludedSites || {};
-            let changed = false;
-
-            // Only target clean hostname
-            if (sitePreferences[currentHostname]) { delete sitePreferences[currentHostname]; changed = true; }
-            if (excludedSites[currentHostname]) { delete excludedSites[currentHostname]; changed = true; }
-
-            if (changed) {
-                chrome.storage.sync.set({ sitePreferences, excludedSites }, () => {
-                    syncStorageAndUI();
-                    showToast("Custom rule removed");
-                });
-            }
-        });
-    });
-
-    // Flag / Exclude site
+    // Block / Unblock Toggle Button
     flagBtn?.addEventListener("click", () => {
-        if (!currentHostname) return showToast("Cannot save rule");
+        if (!currentHostname) return showToast("Cannot block system page");
 
         chrome.storage.sync.get(["sitePreferences", "excludedSites"], (data) => {
             let sitePreferences = data.sitePreferences || {};
             let excludedSites = data.excludedSites || {};
 
-            delete sitePreferences[currentHostname];
-            excludedSites[currentHostname] = true;
+            if (excludedSites[currentHostname]) {
+                delete excludedSites[currentHostname];
+                showToast(`Enabled on ${currentHostname}`);
+            } else {
+                excludedSites[currentHostname] = true;
+                delete sitePreferences[currentHostname];
+                showToast(`Disabled on ${currentHostname}`);
+            }
 
             chrome.storage.sync.set({ sitePreferences, excludedSites }, () => {
                 syncStorageAndUI();
-                showToast(`Disable on ${currentHostname}`);
             });
         });
     });
@@ -264,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const items = Object.keys(storageObject);
 
             if (!items.length) {
-                panelList.innerHTML = `<p>No Custom Site</p>`;
+                panelList.innerHTML = `<p style="color: whitesmoke;">No Custom Site</p>`;
                 return;
             }
 
@@ -277,11 +262,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     : domain;
 
                 card.innerHTML = `
-                <span class="list-item-text">${displayText}</span>
-                <button class="list-item-btn">
-                    <img src="../asset/icon-svg/icon-delete.svg" alt="delete" width="20px" height="20px" />
-                </button>
-            `;
+                    <span class="list-item-text">${displayText}</span>
+                    <button class="list-item-btn">
+                        <img src="../asset/icon-svg/icon-delete.svg" alt="delete" width="20px" height="20px" />
+                    </button>
+                `;
 
                 card.querySelector("button").onclick = () => {
                     delete storageObject[domain];

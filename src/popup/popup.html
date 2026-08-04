@@ -13,11 +13,8 @@
 
 		<div class="title-header">
 			<img src="../asset/logo/icon_128.png" alt="Pro DoubleClick Icon" />
-			<a target="_blank" href="https://addons.mozilla.org/en-US/firefox/addon/pro-doubleclick"
-				title="Go to Firefox add-ons store">Pro
-				double-click</a>
+			<p>Pro double-click</p>
 		</div>
-
 
 		<div class="card-status">
 			<div class="status-current">
@@ -28,13 +25,14 @@
 			</div>
 		</div>
 
-		<div class="site-card">
-			<div class="section-title"><span class="section-title-label this-label">this site</span>&nbsp; open
-				links in new tab</div>
+		<div class="site-card this-site">
+			<div class="section-title">
+				<span class="section-title-label this-label">this site</span>&nbsp; open links in new tab
+			</div>
 
-			<div class="top-buttons ">
+			<div class="top-buttons">
 				<button id="siteBtnFront" class="top-buttons-layout">
-					<span class="site-btn site-btn-override">
+					<span class="site-btn">
 						<svg class="tabicon">
 							<use href="#FrontTab" />
 						</svg>
@@ -43,7 +41,7 @@
 				</button>
 
 				<button id="siteBtnBack" class="top-buttons-layout">
-					<span class="site-btn site-btn-override">
+					<span class="site-btn">
 						<svg class="tabicon">
 							<use href="#BackTab" />
 						</svg>
@@ -53,12 +51,13 @@
 			</div>
 		</div>
 
-		<div class="site-card">
-			<div class="section-title"><span class="section-title-label all-label">all sites
-				</span>&nbsp; open links in new tab</div>
-			<div class="top-buttons ">
+		<div class="site-card all-sites">
+			<div class="section-title">
+				<span class="section-title-label all-label">all sites</span>&nbsp; open links in new tab
+			</div>
+			<div class="top-buttons">
 				<button id="globalBtnFront" class="top-buttons-layout">
-					<span class="site-btn site-btn-default">
+					<span class="site-btn">
 						<svg class="tabicon">
 							<use href="#FrontTab" />
 						</svg>
@@ -67,7 +66,7 @@
 				</button>
 
 				<button id="globalBtnBack" class="top-buttons-layout">
-					<span class="site-btn site-btn-default">
+					<span class="site-btn">
 						<svg class="tabicon">
 							<use href="#BackTab" />
 						</svg>
@@ -77,7 +76,6 @@
 			</div>
 		</div>
 
-
 		<div class="card">
 			<div class="icon-settings">
 				<div class="button-layout">
@@ -85,57 +83,37 @@
 						<img src="../asset/icon-svg/icon-option.svg" title="Site List" alt="Option Icon" width="20"
 							height="20" />
 					</button>
-					option
-				</div>
-				<div class="button-layout">
-					<button id="btnRemove" class="action-btn">
-						<img src="../asset/icon-svg/icon-remove.svg" title="Remove Site rules" alt="Remove Icon"
-							width="20" height="20" />
-					</button>
-					remove
+					<span>option</span>
 				</div>
 				<div class="button-layout">
 					<button id="btnReset" class="action-btn">
 						<img src="../asset/icon-svg/icon-reset.svg" title="Reset Defaults" alt="Reset Icon" width="20"
 							height="20" />
 					</button>
-					reset
+					<span>reset</span>
 				</div>
 				<div class="button-layout">
 					<button id="btnFlag" class="action-btn">
 						<img src="../asset/icon-svg/icon-block.svg" title="Block Site" alt="Block Icon" width="20"
 							height="20" />
 					</button>
-					block
+					<span id="flagLabel">block</span>
 				</div>
 			</div>
 		</div>
 
-		<div class="connect-section">
-			<a href="https://github.com/pranavxmeta/Pro-DoubleClick/issues" target="_blank" rel="noopener noreferrer"
-				class="btn-guide" aria-label="How-to Guide">
-				<img src="../asset/icon-svg/icon-guide.svg" alt="" width="16" height="16" />
-				<span>Report Issue</span>
-			</a>
-			<a href="https://github.com/pranavxmeta/Pro-DoubleClick" target="_blank" rel="noopener noreferrer"
-				class="btn-guide" aria-label="How-to Guide">
-				<img src="../asset/icon-svg/icon-github-cat.svg" alt="" width="16" height="16" />
-				<span>GitHub</span>
-			</a>
-
-		</div>
 	</div>
 
 	<svg style="display: none">
 		<symbol id="FrontTab" viewBox="0 0 24 24">
 			<path
 				d="M19.001 6.00977C20.6791 6.13743 22.001 7.5392 22.001 9.25V17.25C22.001 19.8734 19.8743 22 17.251 22H9.25098C7.5402 22 6.13942 20.6781 6.01172 19H7.52051C7.64192 19.8479 8.36945 20.5 9.25098 20.5H17.251C19.0459 20.5 20.501 19.0449 20.501 17.25V9.25C20.501 8.36847 19.8489 7.64095 19.001 7.51953V6.00977ZM14.75 2C16.5449 2 18 3.45507 18 5.25V14.75C18 16.5449 16.5449 18 14.75 18H5.25C3.45507 18 2 16.5449 2 14.75V5.25C2 3.45507 3.45507 2 5.25 2H14.75ZM3.5 14.75C3.5 15.7165 4.2835 16.5 5.25 16.5H14.75C15.7165 16.5 16.5 15.7165 16.5 14.75V7.5H3.5V14.75Z"
-				fill="currentcolor" />
+				fill="whitesmoke" />
 		</symbol>
 		<symbol id="BackTab" viewBox="0 0 24 24">
 			<path
 				d="M19.001 6.00977C20.6791 6.13743 22.001 7.5392 22.001 9.25V17.25C22.001 19.8734 19.8743 22 17.251 22H9.25098C7.5402 22 6.13942 20.6781 6.01172 19H7.52051C7.64192 19.8479 8.36945 20.5 9.25098 20.5H17.251C19.0459 20.5 20.501 19.0449 20.501 17.25V9.25C20.501 8.36847 19.8489 7.64095 19.001 7.51953V6.00977ZM14.75 2C16.5449 2 18 3.45507 18 5.25V14.75C18 16.5449 16.5449 18 14.75 18H5.25C3.45507 18 2 16.5449 2 14.75V5.25C2 3.45507 3.45507 2 5.25 2H14.75ZM3.5 14.75C3.5 15.7165 4.2835 16.5 5.25 16.5H14.75C15.7165 16.5 16.5 15.7165 16.5 14.75V7.5H3.5V14.75ZM5.25 3.5C4.2835 3.5 3.5 4.2835 3.5 5.25V6H16.5V5.25C16.5 4.2835 15.7165 3.5 14.75 3.5H5.25Z"
-				fill="currentcolor" />
+				fill="whitesmoke" />
 		</symbol>
 	</svg>
 
