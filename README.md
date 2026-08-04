@@ -38,57 +38,7 @@ Designed with minimalist UI yet packed with customization. Save time, maximize y
 
 Download the Pro DoubleClick extension on your Desktop & Mobile:
 
-[<img alt="Get it from GitHub" src="assets/githubInstall.png" width="140">](https://github.com/pranavxmeta/Pro-DoubleClick/releases)&nbsp;&nbsp;&nbsp;&nbsp;[<img alt="Get it from Microsoft Edge" src="assets/msedgeInstall.png" width="180">](https://microsoftedge.microsoft.com/addons/detail/pro-doubleclick/pgbkdhcaloojlampecdjnmpdffkkjkob)
-
-
-## 🎮 How to use
-
-<div align="center">
-<img src="assets\UIUX.png" width="350" />
-</div>
-<p></p>
-
-<b>1. Title – Pro DoubleClick -</b> Click the title to visit the Microsoft Edge Add‑ons store for review or share the extension.
-
-<b> 2. Current Site Status -</b>
-Displays the active setting for current site. `Default`, `Override`, `Inactive`
-
-<b>3. Current Site Configuration -</b>
-Configure whether links on the Current Site open in a **Front Tab** or **Back Tab**. Settings are auto‑saved instantly for future visits.
-
-<b>4. Default Configuration  -</b>
-Set the global preference for all websites: configure whether links open in a **Front Tab** or **Back Tab** by default. Settings are auto‑saved instantly for future visits.
-
-<b>5. Bottom Control Options:</b>
-<ul>
-<b>Option:</b>
-Opens a separate panel to manage site-specific preferences.
-</ul>
-<ul>
-    <b>Remove:</b>
-Deletes custom settings for the current site, including link behavior or block rules.  
-</ul>
-<ul>
-    <b>Reset:</b>
-Restores extension to factory defaults.
-</ul>
-<ul>
-    <b>Block:</b>
-Blacklists the current site to prevent the extension from running or interfering with its links.
-</ul>
-
-#### 💡 Additional Elements
-<ul>
-<li>
-How-to Guide: 
-Click to access a quick-start guide. 
-</li>
-<li>
-GitHub Icon:
-Link to dev profile
-</li>
-
-</ul>
+[<img alt="Get it from Microsoft Edge" src="assets/msedgeInstall.png" width="180">](https://microsoftedge.microsoft.com/addons/detail/pro-doubleclick/pgbkdhcaloojlampecdjnmpdffkkjkob)
 
 
 ## 🔒 Privacy & Security
